@@ -27,12 +27,14 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/usuario">Cadastro</a></li>
                         <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
                         <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
                         <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
                     </ul>
+                    <div class="success" styles="background-color: #ddffdd border-left: 6px solid #04AA6D">
+                      <p><strong>Usuario logado com sucesso!</strong></p>
+                    </div>
+
                 </div>
             </div>
         </nav>
@@ -608,3 +610,9 @@
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
     </body>
 </html>
+<styles>
+    .success {
+      background-color: #ddffdd ;
+      border-left: 6px solid #04AA6D;
+    }
+</styles>
