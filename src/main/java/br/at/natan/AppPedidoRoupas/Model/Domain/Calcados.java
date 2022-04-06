@@ -2,12 +2,20 @@ package br.at.natan.AppPedidoRoupas.Model.Domain;
 
 import br.at.natan.AppPedidoRoupas.Model.Execption.ValoresInvalidosEx;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "TCalcado")
 public class Calcados extends Produto {
     private String modelo;
     private String marca;
     private Integer tamanho;
     private String cor;
+    private String material;
+    public Calcados(){
 
+    }
     public Calcados(String descricao, Float peso, Float valor,Boolean regiao) throws ValoresInvalidosEx {
         super(descricao, peso, valor,regiao);
     }
@@ -17,6 +25,14 @@ public class Calcados extends Produto {
          if(this.isRegiaoSudeste()){
              return 0;
          } else return this.getPeso() * 0.03f;
+    }
+
+    public String getMaterial() {
+        return material;
+    }
+
+    public void setMaterial(String material) {
+        this.material = material;
     }
 
     @Override

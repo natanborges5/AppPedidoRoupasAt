@@ -1,26 +1,26 @@
 package br.at.natan.AppPedidoRoupas.Controller;
 
-import br.at.natan.AppPedidoRoupas.Model.Domain.Cliente;
 import br.at.natan.AppPedidoRoupas.Model.Domain.Usuario;
-import br.at.natan.AppPedidoRoupas.Model.Execption.ValoresInvalidosEx;
+import br.at.natan.AppPedidoRoupas.Model.Service.ProdutoService;
 import br.at.natan.AppPedidoRoupas.Model.Service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.support.SessionStatus;
 
-import java.util.AbstractList;
-import java.util.Objects;
+import javax.servlet.http.HttpSession;
+
 @SessionAttributes("user")
 @Controller
 public class AcessoController {
     @Autowired
     private UsuarioService usuarioService;
+    @Autowired
+    private ProdutoService produtoService;
     @GetMapping(value = "/")
-    public String telaHome() {
+    public String telaHome(Model model) {
+        model.addAttribute("produtoLista", produtoService.obterLista());
         return "index";
     }
 
@@ -29,6 +29,16 @@ public class AcessoController {
         return "usuario/login";
     }
 
+    @GetMapping(value = "/logout")
+    public String logout(SessionStatus status, HttpSession session,Model model) {
+
+        status.setComplete();
+        session.removeAttribute("user");model.addAttribute(
+                "mensagem",
+                "Logout realizado com sucesso!!"
+        );
+        return "redirect:/";
+    }
     @PostMapping(value = "/login")
     public String usuarioLogin(Model model, @RequestParam String email, @RequestParam String senha){
 
@@ -39,7 +49,7 @@ public class AcessoController {
                     "mensagem",
                     "Login realizado com sucesso!!"
             );
-            return "usuario/home";
+            return telaHome(model);
         } else {
             model.addAttribute(
                     "mensagem",

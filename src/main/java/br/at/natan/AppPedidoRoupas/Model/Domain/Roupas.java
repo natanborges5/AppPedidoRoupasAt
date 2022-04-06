@@ -2,14 +2,21 @@ package br.at.natan.AppPedidoRoupas.Model.Domain;
 
 import br.at.natan.AppPedidoRoupas.Model.Execption.ValoresInvalidosEx;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "TRoupa")
 public class Roupas extends Produto {
     private String marca;
     private String modelo;
     private String tamanho;
-    private String tipo;
     private String cor;
     private String material;
 
+    public Roupas(){
+
+    }
     public Roupas(String descricao, Float peso, Float valor,Boolean regiao) throws ValoresInvalidosEx {
         super(descricao, peso, valor,regiao);
     }
@@ -31,8 +38,6 @@ public class Roupas extends Produto {
         sb.append(modelo);
         sb.append("|Tamanho:");
         sb.append(tamanho);
-        sb.append("|Tipo:");
-        sb.append(tipo);
         sb.append("|Cor:");
         sb.append(cor);
         sb.append("|Material:");
@@ -73,17 +78,6 @@ public class Roupas extends Produto {
             throw new ValoresInvalidosEx("Não foi possivel fazer o cadastro desse produto, insira o tamanho do produto");
         }
         this.tamanho = tamanho;
-    }
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) throws ValoresInvalidosEx {
-        if(tipo == null) {
-            throw new ValoresInvalidosEx("Não foi possivel fazer o cadastro desse produto, insira o tipo do produto");
-        }
-        this.tipo = tipo;
     }
 
     public String getCor() {

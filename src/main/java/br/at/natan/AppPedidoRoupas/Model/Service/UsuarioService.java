@@ -30,4 +30,7 @@ public class UsuarioService {
     public Usuario loginUser(String email, String senha) {
         return  usuarioRepository.autenticarUser(email, senha);
     }
+    public Usuario obterPorEmail(String email) {
+        return  usuarioRepository.obterUserPorEmail(email);
+    }
 }
